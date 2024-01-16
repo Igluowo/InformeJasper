@@ -4,8 +4,6 @@
 
 package proyecto.informejasper;
 
-import java.util.HashMap;
-
 /**
  *
  * @author erick
