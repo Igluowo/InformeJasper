@@ -7,12 +7,12 @@ package proyecto.informejasper;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.*;
-import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
 /**
@@ -24,7 +24,14 @@ public class GenerarInforme extends javax.swing.JFrame {
     /**
      * Creates new form GenerarInforme
      */
-    public GenerarInforme() {
+    
+        String url;
+    String usuario;
+    String clave;
+    public GenerarInforme(String url, String usuario, String clave) {
+        this.url = url;
+        this.usuario = usuario;
+        this.clave = clave;
         initComponents();
     }
 
@@ -50,6 +57,7 @@ public class GenerarInforme extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Generar informe");
+        setResizable(false);
 
         panelFondo.setBackground(new java.awt.Color(204, 183, 104));
         panelFondo.setForeground(new java.awt.Color(204, 153, 255));
@@ -173,6 +181,7 @@ public class GenerarInforme extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBActionPerformed
@@ -190,7 +199,7 @@ public class GenerarInforme extends javax.swing.JFrame {
     private void botonAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAActionPerformed
         Connection conexion = conexion();
         try {
-            JasperPrint print = (JasperPrint) JasperFillManager.fillReport("src/main/java/proyecto/Reportes/ReporteParametro.jasper", null, conexion);
+            JasperPrint print = (JasperPrint) JasperFillManager.fillReport("src/main/java/proyecto/Reportes/creador.jasper", null, conexion);
             JasperViewer.viewReport(print);
         } catch (JRException ex) {
             Logger.getLogger(GenerarInforme.class.getName()).log(Level.SEVERE, null, ex);
@@ -200,15 +209,123 @@ public class GenerarInforme extends javax.swing.JFrame {
     private Connection conexion() {
         Connection conexion = null;
         try {
-            conexion = DriverManager.getConnection("jdbc:sqlserver://192.168.234.35:1433;databaseName=Juegos;TrustServerCertificate=true;",
-                    "sa", "@Contraseña1");
+            System.out.println(usuario);
+            System.out.println(clave);
+            conexion = DriverManager.getConnection("jdbc:sqlserver://" + url + ":1433;databaseName=master;TrustServerCertificate=true;",
+                    usuario, clave);
+            
+            crearBaseDatos(conexion);
+            conexion = DriverManager.getConnection("jdbc:sqlserver://" + url + ":1433;databaseName=juegosERMB;TrustServerCertificate=true;",
+                    usuario, clave);
+            crearBase(conexion);
             System.out.println("Conexion exitosa");
             return conexion;
         } catch (SQLException ex) {
-            System.out.println("conexion Fallida");
-        }
+            JOptionPane.showMessageDialog(this, "Los datos de conexion no son correctos", "Error de conexion", JOptionPane.ERROR_MESSAGE);
+            System.exit(1);
+        } 
         return conexion;
     }
+    
+    private void crearBaseDatos(Connection conexion) throws SQLException {
+         Statement crear = conexion.createStatement();
+         
+        String SQL = """
+                     IF EXISTS (SELECT 1 FROM sys.databases WHERE name = 'juegosERMB')
+                     BEGIN
+                         DROP DATABASE [juegosERMB]
+                     END
+                     CREATE DATABASE [juegosERMB]""";
+        crear.execute(SQL);
+    }
+
+    private void crearBase(Connection conexion) throws SQLException, SQLException {
+        Statement crear = conexion.createStatement();
+        String SQL
+                = """
+
+                  /****** Object:  Table [dbo].[Creador]    Script Date: 12/01/2024 17:50:20 ******/
+                  SET ANSI_NULLS ON
+
+                  SET QUOTED_IDENTIFIER ON
+
+                  CREATE TABLE [dbo].[Creador](
+                  \t[IdC] [int] NOT NULL,
+                  \t[Creador] [varchar](255) NULL,
+                  \t[Pais] [varchar](255) NULL,
+                  \t[puntuacion] [int] NULL,
+                  PRIMARY KEY CLUSTERED 
+                  (
+                  \t[IdC] ASC
+                  )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+                  ) ON [PRIMARY]
+
+                  /****** Object:  Table [dbo].[Juegos]    Script Date: 12/01/2024 17:50:20 ******/
+                  SET ANSI_NULLS ON
+
+                  SET QUOTED_IDENTIFIER ON
+
+                  CREATE TABLE [dbo].[Juegos](
+                  \t[idJ] [int] IDENTITY(1,1) NOT NULL,
+                  \t[juego] [varchar](255) NULL,
+                  \t[fechaCreacion] [date] NULL,
+                  \t[Id_Tipo] [int] NULL,
+                  \t[idC] [int] NULL,
+                  \t[precio] [float] NULL,
+                  PRIMARY KEY CLUSTERED 
+                  (
+                  \t[idJ] ASC
+                  )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+                  ) ON [PRIMARY]
+
+                  /****** Object:  Table [dbo].[tipos]    Script Date: 12/01/2024 17:50:20 ******/
+                  SET ANSI_NULLS ON
+
+                  SET QUOTED_IDENTIFIER ON
+
+                  CREATE TABLE [dbo].[tipos](
+                  \t[Id_tipo] [int] NOT NULL,
+                  \t[Tipo] [varchar](255) NULL,
+                  PRIMARY KEY CLUSTERED 
+                  (
+                  \t[Id_tipo] ASC
+                  )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+                  ) ON [PRIMARY]
+
+                  INSERT [dbo].[Creador] ([IdC], [Creador], [Pais], [puntuacion]) VALUES (1, N'Toby Fox', N'Estados Unidos', 10)
+                  INSERT [dbo].[Creador] ([IdC], [Creador], [Pais], [puntuacion]) VALUES (2, N'Scott Cawthon', N'Estados Unidos', 8)
+                  INSERT [dbo].[Creador] ([IdC], [Creador], [Pais], [puntuacion]) VALUES (3, N'Zeekerss', N'Estados Unidos', 9)
+                  INSERT [dbo].[Creador] ([IdC], [Creador], [Pais], [puntuacion]) VALUES (4, N'Nintendo', N'Jap\u00f3n', 5)
+                  INSERT [dbo].[Creador] ([IdC], [Creador], [Pais], [puntuacion]) VALUES (5, N'Tequila works', N'Espa\u00f1a', 7)
+
+                  SET IDENTITY_INSERT [dbo].[Juegos] ON 
+                  
+                  INSERT [dbo].[Juegos] ([idJ], [juego], [fechaCreacion], [Id_Tipo], [idC], [precio]) VALUES (83, N'Undertale', CAST(N'2015-09-15' AS Date), 1, 1, 8.3)
+                  INSERT [dbo].[Juegos] ([idJ], [juego], [fechaCreacion], [Id_Tipo], [idC], [precio]) VALUES (84, N'Deltarune', CAST(N'2018-10-31' AS Date), 1, 1, 15.2)
+                  INSERT [dbo].[Juegos] ([idJ], [juego], [fechaCreacion], [Id_Tipo], [idC], [precio]) VALUES (85, N'Five night at Freddys', CAST(N'2014-08-08' AS Date), 2, 2, 10.5)
+                  INSERT [dbo].[Juegos] ([idJ], [juego], [fechaCreacion], [Id_Tipo], [idC], [precio]) VALUES (86, N'Five night at Freddys 2', CAST(N'2014-11-11' AS Date), 2, 2, 10.5)
+                  INSERT [dbo].[Juegos] ([idJ], [juego], [fechaCreacion], [Id_Tipo], [idC], [precio]) VALUES (87, N'Five night at Freddys 3', CAST(N'2015-03-02' AS Date), 2, 2, 10.5)
+                  INSERT [dbo].[Juegos] ([idJ], [juego], [fechaCreacion], [Id_Tipo], [idC], [precio]) VALUES (88, N'Five night at Freddys 4', CAST(N'2015-07-23' AS Date), 2, 2, 10.5)
+                  INSERT [dbo].[Juegos] ([idJ], [juego], [fechaCreacion], [Id_Tipo], [idC], [precio]) VALUES (89, N'Five night at Freddys Sister Location', CAST(N'2016-10-07' AS Date), 2, 2, 10.5)
+                  INSERT [dbo].[Juegos] ([idJ], [juego], [fechaCreacion], [Id_Tipo], [idC], [precio]) VALUES (90, N'Lethal Company', CAST(N'2023-10-23' AS Date), 2, 3, 9.55)
+                  INSERT [dbo].[Juegos] ([idJ], [juego], [fechaCreacion], [Id_Tipo], [idC], [precio]) VALUES (91, N'The Legend of Zelda Tears of the Kingdom', CAST(N'2023-05-12' AS Date), 1, 4, 59.99)
+                  INSERT [dbo].[Juegos] ([idJ], [juego], [fechaCreacion], [Id_Tipo], [idC], [precio]) VALUES (92, N'Song of the Nunu', CAST(N'2023-11-01' AS Date), 3, 5, 29.99)
+                  SET IDENTITY_INSERT [dbo].[Juegos] OFF
+
+                  INSERT [dbo].[tipos] ([Id_tipo], [Tipo]) VALUES (1, N'RPG')
+                  INSERT [dbo].[tipos] ([Id_tipo], [Tipo]) VALUES (2, N'Terror')
+                  INSERT [dbo].[tipos] ([Id_tipo], [Tipo]) VALUES (3, N'Aventura')
+
+                  ALTER TABLE [dbo].[Juegos]  WITH CHECK ADD  CONSTRAINT [FK_idCreador] FOREIGN KEY([idC])
+                  REFERENCES [dbo].[Creador] ([IdC])
+                  ALTER TABLE [dbo].[Juegos] CHECK CONSTRAINT [FK_idCreador]
+                  ALTER TABLE [dbo].[Juegos]  WITH CHECK ADD  CONSTRAINT [FK_idTipo] FOREIGN KEY([Id_Tipo])
+                  REFERENCES [dbo].[tipos] ([Id_tipo])
+                  ALTER TABLE [dbo].[Juegos] CHECK CONSTRAINT [FK_idTipo]
+                  """;
+        crear.execute(SQL);
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Titulo;

@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.6.final using JasperReports Library version 6.20.6-5c96b6aa8a39ac1dc6b6bea4b81168e16dd39231  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="creador" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="88c56de0-8375-43bc-bb67-6bbb5d1bbc5d">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter"/>
+	<subDataset name="DatosGrafico" uuid="944dbbec-3fe5-4eae-bc7f-b7a8a96a7be5">
+		<property name="com.jaspersoft.studio.data.sql.tables">
+			<![CDATA[IkNyZWFkb3IiIEFTICwyMTcsMzcsNmY2YmY4ZjMtZGM1NC00MzIzLTgzMGUtNGQ0YzZhMjQ4ZTJl
+Ow==]]>
+		</property>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter"/>
+		<queryString language="SQL">
+			<![CDATA[SELECT "IdC",
+	"Creador",
+	"Pais",
+	puntuacion
+FROM "Creador"]]>
+		</queryString>
+		<field name="IdC" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.name" value="IdC"/>
+			<property name="com.jaspersoft.studio.field.label" value="IdC"/>
+		</field>
+		<field name="Creador" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="Creador"/>
+			<property name="com.jaspersoft.studio.field.label" value="Creador"/>
+		</field>
+		<field name="Pais" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="Pais"/>
+			<property name="com.jaspersoft.studio.field.label" value="Pais"/>
+		</field>
+		<field name="puntuacion" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.name" value="puntuacion"/>
+			<property name="com.jaspersoft.studio.field.label" value="puntuacion"/>
+		</field>
+	</subDataset>
+	<queryString language="SQL">
+		<![CDATA[select count(creador) as creadores,
+avg (Puntuacion) as puntuacion,
+pais from Creador
+
+group by Pais]]>
+	</queryString>
+	<field name="creadores" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="creadores"/>
+		<property name="com.jaspersoft.studio.field.label" value="creadores"/>
+	</field>
+	<field name="puntuacion" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="puntuacion"/>
+		<property name="com.jaspersoft.studio.field.label" value="puntuacion"/>
+	</field>
+	<field name="pais" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="pais"/>
+		<property name="com.jaspersoft.studio.field.label" value="pais"/>
+	</field>
+	<variable name="Media" class="java.lang.Double" calculation="Average">
+		<variableExpression><![CDATA[$F{puntuacion}]]></variableExpression>
+	</variable>
+	<group name="creadores">
+		<groupExpression><![CDATA[$F{creadores}]]></groupExpression>
+	</group>
+	<group name="puntuacion">
+		<groupExpression><![CDATA[$F{puntuacion}]]></groupExpression>
+	</group>
+	<group name="pais">
+		<groupExpression><![CDATA[$F{pais}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="69" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="89" backcolor="#D3D0CB" uuid="d55a9a54-bff0-4a4a-846d-b691fcd265d0"/>
+				<staticText>
+					<reportElement x="80" y="23" width="440" height="35" uuid="1d63dae8-97bc-4941-994d-401d1363a6d3"/>
+					<textElement>
+						<font size="25"/>
+					</textElement>
+					<text><![CDATA[Informe de creadores de videojuegos]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="4" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="56" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-4" width="595" height="60" backcolor="#D3D0CB" uuid="e5962b36-cbec-4410-82e9-3d1b448f2b83"/>
+				<frame>
+					<reportElement mode="Opaque" x="22" y="10" width="540" height="45" backcolor="#E2C044" uuid="db0d53cb-aae0-4826-a63b-f154a916f980">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+					<box bottomPadding="10">
+						<pen lineWidth="5.5" lineStyle="Solid"/>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="2.5" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<staticText>
+						<reportElement x="50" y="6" width="78" height="26" uuid="816268c1-a998-4837-b307-b7079a33bdd5">
+							<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						</reportElement>
+						<textElement>
+							<font size="15"/>
+						</textElement>
+						<text><![CDATA[Creadores]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="228" y="6" width="80" height="22" uuid="0a872177-f7fe-41fe-8bc3-1f25f0deb889">
+							<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						</reportElement>
+						<textElement>
+							<font size="15"/>
+						</textElement>
+						<text><![CDATA[Puntuación]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="420" y="6" width="40" height="22" uuid="52598eef-d0e4-4687-8e2f-e50f925b81fc">
+							<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8dd01527-4696-46a3-9b63-6c4a03094100"/>
+							<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						</reportElement>
+						<textElement>
+							<font size="15"/>
+						</textElement>
+						<text><![CDATA[País]]></text>
+					</staticText>
+				</frame>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="48" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="0" width="595" height="48" backcolor="#D3D0CB" uuid="c2fef567-5dda-4a48-ab67-3d9ebeae5806">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<frame>
+					<reportElement mode="Opaque" x="21" y="-3" width="543" height="46" backcolor="#587B7F" uuid="244eaaa6-4324-4568-b8cf-32ad18a22008">
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="3.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textField>
+						<reportElement x="60" y="8" width="100" height="30" forecolor="#FFFFFF" uuid="502d1a6c-ac64-405a-b0ed-8f17c8e95aa3">
+							<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="10a87283-32fb-4e8b-a1ea-b2655627f6d9"/>
+						</reportElement>
+						<textElement>
+							<font size="14"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{creadores}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement x="240" y="9" width="100" height="30" forecolor="#FFFFFF" uuid="32e5fca9-7505-4172-afb5-6210160d6662">
+							<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9fc93da5-f504-41d3-9354-15c2fc2eb119"/>
+						</reportElement>
+						<textElement>
+							<font size="14"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{puntuacion}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement x="420" y="8" width="100" height="30" forecolor="#FFFFFF" uuid="a7ec8769-dd7f-4816-bf7e-b2189ed26bef">
+							<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8dd01527-4696-46a3-9b63-6c4a03094100"/>
+						</reportElement>
+						<textElement>
+							<font size="14"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{pais}]]></textFieldExpression>
+					</textField>
+				</frame>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="3" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="315" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-5" width="595" height="320" backcolor="#D3D0CB" uuid="879e6213-2217-4e6b-a7be-d0da790db0c1">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<subreport>
+					<reportElement x="0" y="240" width="100" height="40" uuid="1e4217ac-0b79-41fe-aca8-a574775f5ec0"/>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression><![CDATA["subreportCreador.jasper"]]></subreportExpression>
+				</subreport>
+				<barChart>
+					<chart isShowLegend="false">
+						<reportElement x="350" y="80" width="200" height="200" isPrintInFirstWholeBand="true" uuid="f72f9890-c4c8-450a-a5fd-169ca3cdb3de"/>
+						<chartTitle/>
+						<chartSubtitle/>
+						<chartLegend/>
+					</chart>
+					<categoryDataset>
+						<dataset>
+							<datasetRun subDataset="DatosGrafico" uuid="642f4447-af7c-4e4b-909e-d336a578e811">
+								<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+							</datasetRun>
+						</dataset>
+						<categorySeries>
+							<seriesExpression><![CDATA[$F{Creador}]]></seriesExpression>
+							<categoryExpression><![CDATA[$F{Pais}]]></categoryExpression>
+							<valueExpression><![CDATA[$F{puntuacion}]]></valueExpression>
+							<labelExpression><![CDATA[$F{Creador}]]></labelExpression>
+						</categorySeries>
+					</categoryDataset>
+					<barPlot>
+						<plot labelRotation="25.0"/>
+						<itemLabel/>
+						<categoryAxisFormat labelRotation="25.0">
+							<axisFormat labelColor="#000000" tickLabelColor="#000000" verticalTickLabels="false" axisLineColor="#000000"/>
+						</categoryAxisFormat>
+						<valueAxisFormat>
+							<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+						</valueAxisFormat>
+					</barPlot>
+				</barChart>
+				<rectangle>
+					<reportElement x="100" y="120" width="56" height="50" backcolor="#E2C044" uuid="a9c023f4-6c40-400a-81b6-4fdacdca9d7d"/>
+				</rectangle>
+				<staticText>
+					<reportElement key="" x="22" y="25" width="240" height="30" uuid="81f509bc-c2f3-4268-ae82-2ce73e335052"/>
+					<textElement>
+						<font size="15"/>
+					</textElement>
+					<text><![CDATA[Media de puntuacion de creadores]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="340" y="30" width="230" height="20" uuid="20421fd4-96cd-4243-b9a5-5e364e2995f3"/>
+					<textElement>
+						<font size="15"/>
+					</textElement>
+					<text><![CDATA[Puntuacion de creadores por país]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="40" y="130" width="100" height="30" uuid="836d4807-dfb2-4b9a-8fb4-8cb9c05ad4d0">
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Right">
+						<font size="20"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{Media}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</summary>
+</jasperReport>

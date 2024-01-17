@@ -11,7 +11,7 @@ package proyecto.informejasper;
 public class InformeJasper {
 
     public static void main(String[] args) {
-        GenerarInforme pantalla = new GenerarInforme();
-        pantalla.setVisible(true);
+        PedirURL url = new PedirURL();
+        url.setVisible(true);
     }
 }

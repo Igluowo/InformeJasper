@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.6.final using JasperReports Library version 6.20.6-5c96b6aa8a39ac1dc6b6bea4b81168e16dd39231  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subreportCreador" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="96fedbb8-9bb6-40a3-939b-7fdc90353f6d">
+	<property name="com.jaspersoft.studio.data.sql.tables">
+		<![CDATA[IkNyZWFkb3IiIEFTICw2MiwxMzcsNjhiNTIwM2MtMmI3Ny00NTk5LWI2MmEtMTJkY2QwZWY5ODFm
+OyJKdWVnb3MiIEFTICwxNzAsMjE5LDBhN2U4YmQzLWJmMjItNDAxYS1iZTBkLWJjNTJlNjViNmFi
+YTt0aXBvcyBBUyAsNDMsMzM1LDEwNWE1NmViLWVjODEtNGU5My05MTIzLTEyMDhkM2MzNzYyNjs=]]>
+	</property>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT tipos."Tipo",
+	tipos."Id_tipo",
+	"Juegos".precio,
+	"Juegos"."idC",
+	"Juegos"."Id_Tipo",
+	"Juegos"."fechaCreacion",
+	"Juegos".juego,
+	"Juegos"."idJ",
+	"Creador".puntuacion,
+	"Creador"."Pais",
+	"Creador"."Creador",
+	"Creador"."IdC"
+FROM "Juegos"
+	INNER JOIN "Creador" ON 
+	 "Juegos"."idC" = "Creador"."IdC" 
+	INNER JOIN tipos ON 
+	 "Juegos"."Id_Tipo" = tipos."Id_tipo"]]>
+	</queryString>
+	<field name="Tipo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Tipo"/>
+		<property name="com.jaspersoft.studio.field.label" value="Tipo"/>
+	</field>
+	<field name="Id_tipo" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="Id_tipo"/>
+		<property name="com.jaspersoft.studio.field.label" value="Id_tipo"/>
+	</field>
+	<field name="precio" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="precio"/>
+		<property name="com.jaspersoft.studio.field.label" value="precio"/>
+	</field>
+	<field name="idC" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="idC"/>
+		<property name="com.jaspersoft.studio.field.label" value="idC"/>
+	</field>
+	<field name="Id_Tipo" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="Id_Tipo"/>
+		<property name="com.jaspersoft.studio.field.label" value="Id_Tipo"/>
+	</field>
+	<field name="fechaCreacion" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="fechaCreacion"/>
+		<property name="com.jaspersoft.studio.field.label" value="fechaCreacion"/>
+	</field>
+	<field name="juego" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="juego"/>
+		<property name="com.jaspersoft.studio.field.label" value="juego"/>
+	</field>
+	<field name="idJ" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="idJ"/>
+		<property name="com.jaspersoft.studio.field.label" value="idJ"/>
+	</field>
+	<field name="puntuacion" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="puntuacion"/>
+		<property name="com.jaspersoft.studio.field.label" value="puntuacion"/>
+	</field>
+	<field name="Pais" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Pais"/>
+		<property name="com.jaspersoft.studio.field.label" value="Pais"/>
+	</field>
+	<field name="Creador" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Creador"/>
+		<property name="com.jaspersoft.studio.field.label" value="Creador"/>
+	</field>
+	<field name="IdC" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="IdC"/>
+		<property name="com.jaspersoft.studio.field.label" value="IdC"/>
+	</field>
+	<group name="Tipo">
+		<groupExpression><![CDATA[$F{Tipo}]]></groupExpression>
+	</group>
+	<group name="Id_tipo">
+		<groupExpression><![CDATA[$F{Id_tipo}]]></groupExpression>
+	</group>
+	<group name="precio">
+		<groupExpression><![CDATA[$F{precio}]]></groupExpression>
+	</group>
+	<group name="idC">
+		<groupExpression><![CDATA[$F{idC}]]></groupExpression>
+	</group>
+	<group name="Id_Tipo">
+		<groupExpression><![CDATA[$F{Id_Tipo}]]></groupExpression>
+	</group>
+	<group name="fechaCreacion">
+		<groupExpression><![CDATA[$F{fechaCreacion}]]></groupExpression>
+	</group>
+	<group name="juego">
+		<groupExpression><![CDATA[$F{juego}]]></groupExpression>
+	</group>
+	<group name="idJ">
+		<groupExpression><![CDATA[$F{idJ}]]></groupExpression>
+	</group>
+	<group name="puntuacion">
+		<groupExpression><![CDATA[$F{puntuacion}]]></groupExpression>
+	</group>
+	<group name="Pais">
+		<groupExpression><![CDATA[$F{Pais}]]></groupExpression>
+	</group>
+	<group name="Creador">
+		<groupExpression><![CDATA[$F{Creador}]]></groupExpression>
+	</group>
+	<group name="IdC">
+		<groupExpression><![CDATA[$F{IdC}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="49" splitType="Stretch">
+			<staticText>
+				<reportElement x="100" y="9" width="387" height="30" uuid="c11a201a-43e0-4530-a215-0229a5fab653"/>
+				<textElement>
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[Subinforme de juegos por creadores]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="2" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="39" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="10" y="-2" width="530" height="40" backcolor="#E2C044" uuid="457d5621-fc9c-4038-b16e-1c794fb63095"/>
+				<box>
+					<bottomPen lineWidth="3.0"/>
+				</box>
+				<staticText>
+					<reportElement x="450" y="10" width="80" height="30" uuid="f0f78535-456e-448a-9314-ec2a4434f155">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d3ddcb9c-54da-4ce6-9b35-0372f6505672"/>
+					</reportElement>
+					<textElement>
+						<font size="16"/>
+					</textElement>
+					<text><![CDATA[Tipo]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="250" y="10" width="100" height="30" uuid="bf4acb71-6c74-4658-aca4-5f7d3aa4f20e">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3a1eea54-5a72-4c6e-adcf-7fcc3f7af491"/>
+					</reportElement>
+					<textElement>
+						<font size="16"/>
+					</textElement>
+					<text><![CDATA[Creador]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="50" y="10" width="100" height="30" uuid="e80e8ed3-2e29-46e3-b889-3d419937fd6d">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d51ae4b5-e00c-4171-bb14-00d1e49f7ad8"/>
+					</reportElement>
+					<textElement>
+						<font size="16"/>
+					</textElement>
+					<text><![CDATA[Juego]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="40" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="10" y="1" width="530" height="39" backcolor="#587B7F" uuid="99c4f288-992d-4b7d-90ec-5a3994db4bd4">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="3.0"/>
+				</box>
+				<textField>
+					<reportElement x="40" y="10" width="200" height="20" forecolor="#FFFFFF" uuid="ef25eb43-f25c-4a0a-a686-7cf1617639de">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d51ae4b5-e00c-4171-bb14-00d1e49f7ad8"/>
+					</reportElement>
+					<textFieldExpression><![CDATA[$F{juego}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="250" y="10" width="100" height="20" forecolor="#FFFFFF" uuid="ec514ffa-ac67-4fcb-912f-58f2d097deea">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3a1eea54-5a72-4c6e-adcf-7fcc3f7af491"/>
+					</reportElement>
+					<textFieldExpression><![CDATA[$F{Creador}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="450" y="7" width="55" height="25" forecolor="#FFFFFF" uuid="665581c5-ea0a-4034-b05a-6b25f1ea1e0f">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d3ddcb9c-54da-4ce6-9b35-0372f6505672"/>
+					</reportElement>
+					<textFieldExpression><![CDATA[$F{Tipo}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
